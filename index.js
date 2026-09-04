@@ -59,7 +59,7 @@ export default async function main(payload, tmp = '', ffmpegPath = '') {
     audios = await TTS.getAllAudioBase64(text, { lang })
   } catch (error) {
     if (lang !== 'en') {
-      console.warn(`TTS failed for lang "${lang}", falling back to "en":`, error.message)
+      console.warn('TTS failed for lang %s, falling back to "en":', lang, error?.message)
       lang = 'en'
       audios = await TTS.getAllAudioBase64(text, { lang: 'en' })
     } else {
