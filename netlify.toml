@@ -1,21 +1,16 @@
-# fluent-ffmpeg is deprecated, https://github.com/fluent-ffmpeg/node-fluent-ffmpeg/
-# [build]
-#   command = """
-#   mkdir bin;
-#   cd bin;
-#   wget -q https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz;
-#   tar xf ffmpeg-git-amd64-static.tar.xz;
-#   mv ./**/ffmpeg ./**/ffprobe .;
-#   rm -rf ffmpeg-git*;
-#   """
+[build]
+  command = """
+  mkdir -p bin
+  curl -sL https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz | tar -xJf - --strip-components=1 -C bin --wildcards '*/ffmpeg'
+  chmod +x bin/ffmpeg
+  """
 
 [build.environment]
   FFMPEG_PATH = "/var/task/bin/ffmpeg"
-  FFPROBE_PATH = "/var/task/bin/ffprobe"
 
 [functions]
   directory = "/functions"
-  included_files = [ "bin/*", "README.md" ]
+  included_files = [ "bin/ffmpeg", "README.md" ]
 
 [[redirects]]
   from = "/"
