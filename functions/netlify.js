@@ -9,10 +9,12 @@ export default async function handler(req) {
   try {
     return await main(payload, '/tmp/', '/var/task/bin/ffmpeg')
   } catch (error) {
-    return new Response(error, {
+    console.error(error)
+    return new Response('Internal Server Error', {
       status: 500,
       headers: {
         'content-type': 'text/plain; charset=utf-8',
+        'access-control-allow-origin': '*',
       }
     })
   }
